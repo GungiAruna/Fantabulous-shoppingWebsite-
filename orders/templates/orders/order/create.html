@@ -1,0 +1,20 @@
+{% extends "shop/base.html" %}
+
+{% block title %}
+    Checkout
+{% endblock %}
+
+{% block content %}
+    <h1 style="color:white">Checkout</h1>
+
+    <div class="order-info" style="font-size:30px; color:white; float:left;">
+        <h3>Your order</h3>
+        <ul>
+            {% for item in cart %}
+                <li>{{ item.quantity }}x {{ item.product.name }} <span>${{ item.total_price }}</span></li>
+            {% endfor %}
+        </ul>
+        <p>Total: ${{ cart.get_total_price }}</p>
+    </div>
+    <i><div class="id" style="float:right; font-size:60px; color:white; height:300px;"><p>ThankYou</p></div></i>
+{% endblock %}

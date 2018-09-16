@@ -1,0 +1,22 @@
+{% extends 'shop/base.html' %}
+{% load static %}
+{% block title %}
+    {{ product.name }}
+{% endblock %}
+
+{% block content %}
+   <div class="product_detail" style = "float:left">
+       <img src="{% if product.image %} {{ product.image.url }} {% else %} {% static 'img/default.jpg' %} {% endif %}" alt="..." style="width:500px; height:400px;">
+        </div>
+          <div class="col-md-6" style="float:center">
+           <i><h1 style="color:white">{{ product.name }}</h1></i><br>
+            <h2><a href="{{ product.category.get_absolute_url }}" style="color:white; width:200px;background-color:#F87217; height: 50px; font-size:30px;">{{ product.category }}</a></h2><br>
+             <p class="price" style="font-size:20px; color:white;">${{ product.price }}</p>
+             <form action="{% url 'cart:cart_add' product.id %}" method="post" style="font-size:30px; text-color: black;">
+                 {{ cart_product_form }}
+                    {% csrf_token %}
+                      <input type="submit" value="Add to cart" style="background-color: white;color:Black; width:150px; height: 50px; font-size:20px;">
+             </form>
+              {{ product.description|linebreaks }}
+               </div>
+{% endblock %}

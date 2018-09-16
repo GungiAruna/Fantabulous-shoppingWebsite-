@@ -1,0 +1,33 @@
+{% load static %}
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Fantabulous Shopping Website{% endblock %}</title>
+    <!--<link href="{% static 'css/base.css' %}" rel="stylesheet">-->
+</head>
+<body style="background-color:#F87217">
+<div id="header">
+    <header style="font-size:130px; color: white;"><i><center>Fantabulous</center></i></header><br>
+    </div>
+<div id="subheader">
+    <div class="cart" style="font-size:25px; color:White;">
+            {% with total_items=cart|length %}
+                {% if cart|length > 0 %}
+        <p style="color:white">Your cart:</p>
+                        <a href="{% url 'cart:cart_detail' %}"><button type="button" style="background-color:#F87217; color:White; width:200px; height: 30px;">
+                            {{ total_items }} item{{ total_items|pluralize }}{{ cart.get_total_items }}
+                        </button></a>
+                    {% else %}
+        Your cart is empty.
+        <br>
+            {% endif %}
+        {% endwith %}
+    </div>
+</div>
+<br>
+<div id="content">
+    {% block content %}
+    {% endblock %}
+</div>
+</body>
+</html>
